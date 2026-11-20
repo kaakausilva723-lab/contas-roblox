@@ -1,166 +1,677 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b0d12">
-<title>KiwAI — Central de IAs</title>
-<style>
-:root{color-scheme:dark;--bg:#0b0d12;--panel:#121620;--panel2:#191f2b;--line:#272e3c;--text:#eef2f8;--muted:#98a3b7;--accent:#a78bfa;--accent2:#6d5ce8;--green:#7ee0b3}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#222044 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
-button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:28px 20px 50px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:52px}.brand{display:flex;align-items:center;gap:12px;font-weight:850;font-size:23px;letter-spacing:-.7px}.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(140deg,#c4b5fd,#7c3aed);color:#171124;font-size:24px;box-shadow:0 8px 30px #8b5cf633}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 12px;color:var(--muted);font-size:12px}.hero{text-align:center;max-width:760px;margin:0 auto 34px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(38px,7vw,66px);letter-spacing:-2.5px;line-height:1.05;margin:14px 0}.hero h1 span{background:linear-gradient(90deg,#ddd6fe,#a78bfa,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:620px}.notice{max-width:850px;margin:0 auto 26px;padding:13px 15px;border:1px solid #574b7b;background:#18152a;border-radius:13px;color:#cfc7e9;font-size:13px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 14px}.section-head h2{font-size:18px;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{background:linear-gradient(150deg,#171c27,#11151d);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;min-height:190px;transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-3px);border-color:#6256a0}.card-top{display:flex;align-items:center;gap:11px}.appicon{width:42px;height:42px;border-radius:13px;background:var(--panel2);display:grid;place-items:center;font-weight:850;font-size:17px;border:1px solid #343b4b}.card h3{font-size:16px;margin:0}.card small{color:var(--muted)}.card p{font-size:13px;color:var(--muted);margin:15px 0 18px;flex:1}.open{display:flex;justify-content:center;align-items:center;gap:8px;text-decoration:none;background:#26213e;border:1px solid #514478;color:#e5ddff;border-radius:11px;padding:10px 12px;font-weight:700;font-size:13px}.open:hover{background:#342a55}.chatbox{margin-top:32px;border:1px solid var(--line);border-radius:20px;background:#11151d;overflow:hidden}.chathead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}.chathead h2{font-size:17px;margin:0}.chathead p{font-size:12px;color:var(--muted);margin:3px 0 0}.chatbody{padding:20px}.chatbody label{display:block;font-size:13px;color:#c8d0df;margin-bottom:8px}.chatbody textarea{width:100%;min-height:120px;resize:vertical;background:#0c0f15;border:1px solid #303747;border-radius:13px;padding:14px;color:var(--text);outline:none}.chatbody textarea:focus{border-color:var(--accent)}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}.select{flex:1;min-width:210px;background:#1a202c;border:1px solid #303747;border-radius:11px;padding:11px;color:var(--text)}.primary{background:linear-gradient(100deg,#a78bfa,#7c5ce7);border:0;color:#120e20;border-radius:11px;padding:11px 18px;font-weight:850}.secondary{background:#1b212d;border:1px solid var(--line);color:var(--text);border-radius:11px;padding:10px 13px}.hint{color:var(--muted);font-size:12px;margin:12px 0 0}.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{border:1px solid var(--line);background:#171c27;color:#c8d0df;border-radius:99px;padding:7px 10px;font-size:12px}.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.tool{padding:16px;border:1px solid var(--line);border-radius:15px;background:#121620}.tool h3{margin:0 0 6px;font-size:14px}.tool p{color:var(--muted);font-size:12px;margin:0 0 13px}.tool button{width:100%}.footer{margin-top:35px;text-align:center;color:#717d91;font-size:12px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#242a38;border:1px solid #414a5c;border-radius:12px;padding:10px 15px;display:none;max-width:90vw;z-index:5}.toast.show{display:block}
-@media(max-width:780px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tools{grid-template-columns:1fr}.top{margin-bottom:38px}}@media(max-width:520px){.wrap{padding:18px 13px 35px}.grid{grid-template-columns:1fr}.card{min-height:0}.hero h1{letter-spacing:-1.6px}.pill{display:none}.chathead{align-items:flex-start;flex-direction:column}.row>*{width:100%}.primary,.secondary{width:100%}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kiwci | Bio Link Roblox</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        xmas: {
+                            bg: '#050811',
+                            card: '#0b1121',
+                            red: '#ef4444',
+                            green: '#10b981',
+                            ice: '#38bdf8',
+                            frost: '#bae6fd'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        title: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050811;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Winter Glow */
+        .winter-bg-glow {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 680px;
+            height: 680px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(186, 230, 253, 0.08) 42%, rgba(239, 68, 68, 0.04) 68%, transparent 78%);
+            z-index: 0;
+            filter: blur(85px);
+            pointer-events: none;
+            animation: pulseWinter 7s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseWinter {
+            0% { opacity: 0.65; transform: translate(-50%, -50%) scale(0.95); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        /* Glassmorphism Dark Winter */
+        .xmas-glass {
+            background: rgba(11, 17, 33, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(186, 230, 253, 0.2);
+            box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.8), inset 0 0 14px rgba(56, 189, 248, 0.06);
+        }
+
+        /* Subtly Larger Main Account Card (kiwci) */
+        .kiwci-main-card {
+            background: linear-gradient(145deg, rgba(15, 25, 48, 0.78), rgba(10, 16, 32, 0.86));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.38);
+            box-shadow: 0 12px 36px -10px rgba(56, 189, 248, 0.22), inset 0 0 20px rgba(186, 230, 253, 0.08);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kiwci-main-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 14%;
+            right: 14%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(186, 230, 253, 0.75), transparent);
+            pointer-events: none;
+        }
+
+        .kiwci-main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.12), rgba(186, 230, 253, 0.08), transparent);
+            transition: 0.65s;
+        }
+
+        .kiwci-main-card:hover::before {
+            left: 100%;
+        }
+
+        .kiwci-main-card:hover {
+            transform: translateY(-4px) scale(1.012);
+            border-color: rgba(125, 211, 252, 0.7);
+            box-shadow: 0 16px 42px -10px rgba(56, 189, 248, 0.34), inset 0 0 24px rgba(186, 230, 253, 0.12);
+        }
+
+        /* Standard Account Cards */
+        .xmas-card {
+            background: rgba(12, 19, 36, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(186, 230, 253, 0.14);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .xmas-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 18%;
+            right: 18%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            pointer-events: none;
+        }
+
+        .xmas-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), rgba(186, 230, 253, 0.07), transparent);
+            transition: 0.65s;
+        }
+
+        .xmas-card:hover::before {
+            left: 100%;
+        }
+
+        .xmas-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 10px 28px -10px rgba(56, 189, 248, 0.24);
+        }
+
+        /* Snow & Ice Flakes Canvas Layer */
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Minimalist Top Christmas String Lights */
+        .xmas-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            z-index: 2;
+            padding: 0 16px;
+        }
+        .light-bulb {
+            width: 6px;
+            height: 10px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            margin-top: -2px;
+            animation: twinkle 2.4s infinite alternate ease-in-out;
+        }
+        .light-red { background: #ef4444; box-shadow: 0 2px 12px #ef4444; animation-delay: 0s; }
+        .light-green { background: #10b981; box-shadow: 0 2px 12px #10b981; animation-delay: 0.8s; }
+        .light-ice { background: #38bdf8; box-shadow: 0 2px 12px #38bdf8; animation-delay: 1.6s; }
+
+        @keyframes twinkle {
+            0% { opacity: 0.35; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Frost Glow for Heading */
+        .text-glow-xmas {
+            text-shadow: 0 0 16px rgba(56, 189, 248, 0.55), 0 0 32px rgba(186, 230, 253, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050811; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+    </style>
 </head>
-<body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand"><div class="logo">K</div><span>KiwAI</span></div>
-    <div class="pill">✦ Central de inteligência artificial</div>
-  </header>
+<body class="flex flex-col items-center justify-between p-4 md:p-8 relative selection:bg-xmas-ice selection:text-slate-950">
 
-  <main>
-    <section class="hero">
-      <div class="eyebrow">UM SÓ LUGAR · VÁRIAS POSSIBILIDADES</div>
-      <h1>Tua central de <span>inteligência.</span></h1>
-      <p>Acesse ferramentas de IA, prepare perguntas e organize teu fluxo de trabalho em uma interface só.</p>
-    </section>
+    <!-- Minimalist Christmas String Lights at Top Edge -->
+    <div class="xmas-lights" aria-hidden="true">
+        <span class="light-bulb light-red"></span>
+        <span class="light-bulb light-green"></span>
+        <span class="light-bulb light-ice"></span>
+        <span class="light-bulb light-red"></span>
+        <span class="light-bulb light-green"></span>
+        <span class="light-bulb light-ice"></span>
+        <span class="light-bulb light-red"></span>
+        <span class="light-bulb light-green"></span>
+        <span class="light-bulb light-ice hidden sm:inline-block"></span>
+        <span class="light-bulb light-red hidden sm:inline-block"></span>
+        <span class="light-bulb light-green hidden md:inline-block"></span>
+        <span class="light-bulb light-ice hidden md:inline-block"></span>
+    </div>
 
-    <div class="notice">🔒 <b>Transparência:</b> este site funciona no GitHub Pages, sem servidor próprio. Os botões abrem os serviços oficiais. Ele não envia perguntas automaticamente para as APIs nem guarda chaves secretas.</div>
+    <!-- Canvas for soft snow particles + detailed falling ice flakes (❄) -->
+    <canvas id="snowCanvas"></canvas>
 
-    <div class="section-head"><div><h2>Explorar IAs</h2><p>Abre o serviço oficial em uma nova aba.</p></div><span class="pill">10 serviços</span></div>
-    <section class="grid" id="aiGrid">
-      <article class="card"><div class="card-top"><div class="appicon">◎</div><div><h3>ChatGPT</h3><small>OpenAI</small></div></div><p>Conversa, escrita, explicações, ideias e ajuda com programação.</p><a class="open" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Abrir ChatGPT ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">✦</div><div><h3>Google Gemini</h3><small>Google</small></div></div><p>Assistente de IA para perguntas, criação e tarefas multimodais.</p><a class="open" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Abrir Gemini ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">C</div><div><h3>Claude</h3><small>Anthropic</small></div></div><p>Assistência para escrita, análise, raciocínio e código.</p><a class="open" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Abrir Claude ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">D</div><div><h3>DeepSeek</h3><small>DeepSeek</small></div></div><p>Assistente de IA para perguntas, raciocínio e programação.</p><a class="open" href="https://chat.deepseek.com/" target="_blank" rel="noopener noreferrer">Abrir DeepSeek ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">◉</div><div><h3>Perplexity</h3><small>Pesquisa com IA</small></div></div><p>Pesquisa na web e respostas com referências, conforme o serviço.</p><a class="open" href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer">Abrir Perplexity ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">𝕏</div><div><h3>Grok</h3><small>xAI</small></div></div><p>Assistente de IA para perguntas, ideias e informações atuais.</p><a class="open" href="https://grok.com/" target="_blank" rel="noopener noreferrer">Abrir Grok ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">◈</div><div><h3>Microsoft Copilot</h3><small>Microsoft</small></div></div><p>Assistente para perguntas, criação e produtividade.</p><a class="open" href="https://copilot.microsoft.com/" target="_blank" rel="noopener noreferrer">Abrir Copilot ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">∞</div><div><h3>Meta AI</h3><small>Meta</small></div></div><p>Assistente para conversar, explorar ideias e criar conteúdo.</p><a class="open" href="https://www.meta.ai/" target="_blank" rel="noopener noreferrer">Abrir Meta AI ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">M</div><div><h3>Le Chat</h3><small>Mistral AI</small></div></div><p>Assistente da Mistral AI para escrita, pesquisa e produtividade.</p><a class="open" href="https://chat.mistral.ai/" target="_blank" rel="noopener noreferrer">Abrir Le Chat ↗</a></article>
-      <article class="card"><div class="card-top"><div class="appicon">P</div><div><h3>Poe</h3><small>Quora</small></div></div><p>Um lugar para explorar diferentes bots e modelos de IA.</p><a class="open" href="https://poe.com/" target="_blank" rel="noopener noreferrer">Abrir Poe ↗</a></article>
-    </section>
+    <!-- Ambient Glowing Winter Sphere -->
+    <div class="winter-bg-glow"></div>
 
-    <section class="chatbox">
-      <div class="chathead"><div><h2>Preparar uma pergunta</h2><p>Escreve uma vez e copia para usar na IA que escolheres.</p></div><span class="pill">Funciona localmente</span></div>
-      <div class="chatbody">
-        <label for="prompt">Tua pergunta ou instrução</label>
-        <textarea id="prompt" placeholder="Ex.: Explica como funciona um conversor de unidades em JavaScript..."></textarea>
-        <div class="row">
-          <select class="select" id="target" aria-label="Escolher serviço">
-            <option value="chatgpt">ChatGPT</option>
-            <option value="gemini">Google Gemini</option>
-            <option value="claude">Claude</option>
-            <option value="deepseek">DeepSeek</option>
-            <option value="perplexity">Perplexity</option>
-            <option value="grok">Grok</option>
-            <option value="copilot">Microsoft Copilot</option>
-            <option value="metaai">Meta AI</option>
-            <option value="mistral">Le Chat (Mistral AI)</option>
-            <option value="poe">Poe</option>
-          </select>
-          <button class="primary" id="sendBtn">Enviar para IA ↗</button>
-          <button class="secondary" id="copyBtn">Copiar pergunta</button>
+    <!-- Top Right Share Button -->
+    <header class="w-full max-w-xl flex items-center justify-end mb-4 z-20 mt-2">
+        <button onclick="copyBioLink()" class="xmas-glass px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-semibold text-slate-200 hover:text-xmas-ice hover:border-xmas-ice/60 transition-all cursor-pointer" title="Copiar Link da Bio">
+            <i data-lucide="share-2" class="w-4 h-4 text-xmas-ice"></i>
+            <span>Compartilhar</span>
+        </button>
+    </header>
+
+    <main class="w-full max-w-xl flex flex-col items-center z-10 flex-grow">
+
+        <!-- User Profile Hero -->
+        <div class="w-full text-center flex flex-col items-center mb-8 relative">
+            
+            <!-- Avatar Frame with Frost Aura & Vector Santa Hat -->
+            <a href="https://www.roblox.com/users/4111011480/profile" target="_blank" rel="noopener noreferrer" class="relative group cursor-pointer block mt-3" title="Ir para o perfil do Roblox">
+                <!-- Glowing Frost Outer Ring -->
+                <div class="absolute -inset-2 bg-gradient-to-tr from-sky-500 via-xmas-frost to-red-500/70 rounded-full blur-md opacity-75 group-hover:opacity-100 group-hover:scale-105 transition duration-500"></div>
+                
+                <!-- Sleek Vector Santa Hat -->
+                <svg class="w-16 h-16 absolute -top-7 -left-4 z-20 -rotate-12 drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] pointer-events-none transition-transform duration-300 group-hover:-rotate-6" viewBox="0 0 64 64" fill="none">
+                    <path d="M12 44C14 24 30 12 52 16C46 22 44 32 45 44H12Z" fill="url(#hatRed)"/>
+                    <path d="M52 16C55 17 57 21 55 25" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="55" cy="26" r="5.5" fill="#f8fafc"/>
+                    <rect x="8" y="41" width="40" height="9" rx="4.5" fill="#f8fafc"/>
+                    <defs>
+                        <linearGradient id="hatRed" x1="12" y1="14" x2="52" y2="44" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#ef4444"/>
+                            <stop offset="1" stop-color="#991b1b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- Avatar Image -->
+                <img src="https://tr.rbxcdn.com/30DAY-Avatar-8977949934864544157A6321AA11A711-Png/720/720/Avatar/Webp/noFilter" 
+                     alt="Avatar Roblox kiwci" 
+                     class="relative w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-2 border-xmas-frost/80 bg-xmas-bg p-1 shadow-2xl">
+            </a>
+
+            <!-- Username -->
+            <h1 class="font-title text-3xl md:text-4xl font-extrabold mt-5 tracking-wide text-glow-xmas text-white">
+                kiwci
+            </h1>
+
+            <!-- Bio Subtitle -->
+            <p class="text-slate-300 text-sm mt-2 max-w-md px-4 font-medium leading-relaxed">
+                ❄ Bem-vindo ao meu perfil! Clique nos cards abaixo para me adicionar diretamente no Roblox.
+            </p>
         </div>
-        <div class="quick">
-          <button class="chip" data-prompt="Explica este assunto passo a passo, com exemplos simples: ">📘 Explicar assunto</button>
-          <button class="chip" data-prompt="Ajuda-me a criar um projeto web. Explica a estrutura e fornece código comentado: ">💻 Criar código</button>
-          <button class="chip" data-prompt="Dá-me 10 ideias originais e práticas para: ">💡 Gerar ideias</button>
-          <button class="chip" data-prompt="Resume o texto a seguir em tópicos claros: ">📝 Resumir texto</button>
+
+        <!-- SUBTLY LARGER MAIN ACCOUNT CARD (kiwci) -->
+        <div class="w-full mb-4">
+            <div onclick="window.open('https://www.roblox.com/users/4111011480/profile', '_blank')" 
+                 class="kiwci-main-card rounded-2xl p-4.5 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer group">
+                
+                <div class="flex items-center gap-4 w-full sm:w-auto">
+                    <div class="relative shrink-0">
+                        <div class="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-cyan-200 rounded-xl blur-sm opacity-45 group-hover:opacity-75 transition duration-300"></div>
+                        <img src="https://tr.rbxcdn.com/30DAY-Avatar-8977949934864544157A6321AA11A711-Png/720/720/Avatar/Webp/noFilter" 
+                             alt="Avatar Roblox kiwci" 
+                             class="relative w-16 h-16 sm:w-[70px] sm:h-[70px] rounded-xl object-cover bg-slate-950 border border-xmas-frost/50 group-hover:scale-105 transition-transform">
+                    </div>
+                    
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <h2 class="font-extrabold text-xl text-white group-hover:text-xmas-frost transition-colors">kiwci</h2>
+                            <i data-lucide="external-link" class="w-4 h-4 text-xmas-ice opacity-75 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs font-medium text-sky-300/85 mt-0.5">conta principal</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end border-t sm:border-t-0 border-sky-300/15 pt-3 sm:pt-0" onclick="event.stopPropagation()">
+                    <button onclick="copyToClipboard('4111011480', 'ID da conta kiwci copiado!')" 
+                            class="xmas-glass p-3 rounded-xl text-slate-200 hover:text-xmas-ice hover:border-xmas-ice/60 transition-colors flex items-center justify-center cursor-pointer" title="Copiar ID da Conta">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                    
+                    <a href="https://www.roblox.com/users/4111011480/profile" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-sky-500/25 transition-all cursor-pointer">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i>
+                        <span>Adicionar</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <p class="hint">O botão tenta passar a pergunta pela URL nos serviços que aceitam esse recurso e também copia o texto como alternativa. O comportamento pode mudar conforme cada serviço; se a pergunta não aparecer preenchida, cola com Ctrl+V. Este site não usa nem armazena chaves de API.</p>
-      </div>
-    </section>
 
-    <div class="section-head"><div><h2>Ferramentas rápidas</h2><p>Pequenas utilidades que funcionam direto no navegador.</p></div></div>
-    <section class="tools">
-      <article class="tool"><h3>🔤 Contador de texto</h3><p>Conta caracteres e palavras da tua pergunta.</p><button class="secondary" id="countBtn">Contar texto</button><p id="countResult" aria-live="polite"></p></article>
-      <article class="tool"><h3>📋 Copiar tudo</h3><p>Copia o texto escrito para a área de transferência.</p><button class="secondary" id="copyAllBtn">Copiar texto</button></article>
-      <article class="tool"><h3>🧹 Limpar campo</h3><p>Apaga o texto atual para começar de novo.</p><button class="secondary" id="clearBtn">Limpar</button></article>
-    </section>
-  </main>
-  <footer class="footer">KiwAI • Projeto independente, não afiliado aos serviços listados.<br>As marcas pertencem aos seus respectivos proprietários.</footer>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script>
-(() => {
-  const $ = (id) => document.getElementById(id);
-  const urls = {
-    chatgpt: "https://chatgpt.com/",
-    gemini: "https://gemini.google.com/",
-    claude: "https://claude.ai/",
-    deepseek: "https://chat.deepseek.com/",
-    perplexity: "https://www.perplexity.ai/",
-    grok: "https://grok.com/",
-    copilot: "https://copilot.microsoft.com/",
-    metaai: "https://www.meta.ai/",
-    mistral: "https://chat.mistral.ai/",
-    poe: "https://poe.com/"
-  };
+        <!-- STANDARD SECONDARY ACCOUNTS (Slightly narrower & compact) -->
+        <div class="w-full max-w-[94%] space-y-3.5">
 
-  // Alguns serviços aceitam texto pela URL; isso pode mudar conforme o serviço.
-  // Se não houver suporte, o texto é copiado e o serviço é aberto para colar manualmente.
-  function makePromptUrl(provider, text) {
-    const q = encodeURIComponent(text);
-    if (provider === "chatgpt") return "https://chatgpt.com/?q=" + q;
-    if (provider === "gemini") return "https://gemini.google.com/app?prompt=" + q;
-    if (provider === "perplexity") return "https://www.perplexity.ai/search?q=" + q;
-    return urls[provider];
-  }
-  const prompt = $("prompt");
-  let toastTimer;
-  function toast(message) {
-    const el = $("toast");
-    el.textContent = message;
-    el.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
-  }
-  async function copyText(text) {
-    if (!text.trim()) { toast("Escreve alguma coisa primeiro."); return; }
-    try {
-      await navigator.clipboard.writeText(text);
-      toast("Copiado para a área de transferência!");
-    } catch (_) {
-      prompt.focus(); prompt.select();
-      const ok = document.execCommand("copy");
-      toast(ok ? "Texto copiado!" : "Seleciona o texto e copia manualmente.");
-    }
-  }
-  $("copyBtn").addEventListener("click", () => copyText(prompt.value));
-  $("copyAllBtn").addEventListener("click", () => copyText(prompt.value));
-  $("sendBtn").addEventListener("click", async () => {
-    const text = prompt.value.trim();
-    if (!text) { toast("Escreve tua pergunta primeiro."); prompt.focus(); return; }
-    const provider = $("target").value;
-    // Copia também como plano B para serviços que ignoram parâmetros de texto.
-    try { await navigator.clipboard.writeText(text); } catch (_) {}
-    const url = makePromptUrl(provider, text);
-    window.open(url, "_blank", "noopener,noreferrer");
-    toast(
-      provider === "chatgpt" || provider === "gemini" || provider === "perplexity"
-        ? "IA aberta. Se a pergunta não aparecer, cola com Ctrl+V."
-        : "Pergunta copiada e IA aberta. Cola com Ctrl+V."
-    );
-  });
-  $("clearBtn").addEventListener("click", () => {
-    prompt.value = "";
-    $("countResult").textContent = "";
-    prompt.focus();
-  });
-  $("countBtn").addEventListener("click", () => {
-    const text = prompt.value.trim();
-    const words = text ? text.split(/\s+/).length : 0;
-    $("countResult").textContent = `${words} palavra(s) · ${prompt.value.length} caractere(s)`;
-  });
-  document.querySelectorAll("[data-prompt]").forEach(button => {
-    button.addEventListener("click", () => {
-      prompt.value = button.dataset.prompt + prompt.value;
-      prompt.focus();
-    });
-  });
-})();
-</script>
+            <!-- ACCOUNT CARD 2 (toby) -->
+            <div onclick="window.open('https://www.roblox.com/pt/users/2380307/profile', '_blank')" 
+                 class="xmas-card rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer group">
+                
+                <div class="flex items-center gap-3.5 w-full sm:w-auto">
+                    <img src="https://tr.rbxcdn.com/30DAY-Avatar-1265D8B8181FC71FE4B4086849909E02-Png/720/720/Avatar/Webp/noFilter" 
+                         alt="Avatar Roblox toby" 
+                         class="w-14 h-14 rounded-xl object-cover bg-slate-900 border border-xmas-frost/25 group-hover:border-xmas-ice/60 group-hover:scale-105 transition-all shrink-0">
+                    
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <h2 class="font-bold text-base text-white group-hover:text-xmas-ice transition-colors">toby</h2>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-xmas-ice opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-[11px] font-mono text-slate-400">ID: 2380307</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-white/5 pt-3 sm:pt-0" onclick="event.stopPropagation()">
+                    <button onclick="copyToClipboard('2380307', 'ID da conta toby copiado!')" 
+                            class="xmas-glass p-2.5 rounded-xl text-slate-200 hover:text-xmas-ice hover:border-xmas-ice/50 transition-colors flex items-center justify-center cursor-pointer" title="Copiar ID da Conta">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                    
+                    <a href="https://www.roblox.com/pt/users/2380307/profile" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-sky-600 border border-sky-400/25 hover:border-sky-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                        <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                        <span>Adicionar</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ACCOUNT CARD 3 (korou) -->
+            <div onclick="window.open('https://www.roblox.com/pt/users/9354796896/profile?friendshipSourceType=PlayerSearch', '_blank')" 
+                 class="xmas-card rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer group">
+                
+                <div class="flex items-center gap-3.5 w-full sm:w-auto">
+                    <img src="https://tr.rbxcdn.com/30DAY-Avatar-A68871948C6FC544C8C14AE954F9FFDB-Png/720/720/Avatar/Webp/noFilter" 
+                         alt="Avatar Roblox korou" 
+                         class="w-14 h-14 rounded-xl object-cover bg-slate-900 border border-xmas-frost/25 group-hover:border-xmas-ice/60 group-hover:scale-105 transition-all shrink-0">
+                    
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <h2 class="font-bold text-base text-white group-hover:text-xmas-ice transition-colors">korou</h2>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-xmas-ice opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-[11px] font-mono text-slate-400">ID: 9354796896</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-white/5 pt-3 sm:pt-0" onclick="event.stopPropagation()">
+                    <button onclick="copyToClipboard('9354796896', 'ID da conta korou copiado!')" 
+                            class="xmas-glass p-2.5 rounded-xl text-slate-200 hover:text-xmas-ice hover:border-xmas-ice/50 transition-colors flex items-center justify-center cursor-pointer" title="Copiar ID da Conta">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                    
+                    <a href="https://www.roblox.com/pt/users/9354796896/profile?friendshipSourceType=PlayerSearch" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-sky-600 border border-sky-400/25 hover:border-sky-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                        <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                        <span>Adicionar</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ACCOUNT CARD 4 (kwz_xd) -->
+            <div onclick="window.open('https://www.roblox.com/pt/users/9477873575/profile', '_blank')" 
+                 class="xmas-card rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer group">
+                
+                <div class="flex items-center gap-3.5 w-full sm:w-auto">
+                    <img src="https://tr.rbxcdn.com/30DAY-Avatar-482CFC525C498601729F7B8782AFF53C-Png/720/720/Avatar/Webp/noFilter" 
+                         alt="Avatar Roblox kwz_xd" 
+                         class="w-14 h-14 rounded-xl object-cover bg-slate-900 border border-xmas-frost/25 group-hover:border-xmas-ice/60 group-hover:scale-105 transition-all shrink-0">
+                    
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <h2 class="font-bold text-base text-white group-hover:text-xmas-ice transition-colors">kwz_xd</h2>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-xmas-ice opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-[11px] font-mono text-slate-400">ID: 9477873575</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-white/5 pt-3 sm:pt-0" onclick="event.stopPropagation()">
+                    <button onclick="copyToClipboard('9477873575', 'ID da conta kwz_xd copiado!')" 
+                            class="xmas-glass p-2.5 rounded-xl text-slate-200 hover:text-xmas-ice hover:border-xmas-ice/50 transition-colors flex items-center justify-center cursor-pointer" title="Copiar ID da Conta">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                    
+                    <a href="https://www.roblox.com/pt/users/9477873575/profile" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800/90 hover:bg-sky-600 border border-sky-400/25 hover:border-sky-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                        <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                        <span>Adicionar</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Toast Notification Popup -->
+    <div id="toast" class="fixed bottom-6 z-50 transform translate-y-20 opacity-0 xmas-glass border-xmas-ice/50 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-2xl pointer-events-none transition-all duration-300">
+        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-xmas-ice flex items-center justify-center">
+            <i data-lucide="check" class="w-5 h-5"></i>
+        </div>
+        <span id="toastMessage" class="text-sm font-semibold text-white">ID copiado!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-6 text-xs text-slate-500 mt-6 z-10 font-medium">
+        <p>❄ Winter Bio Link for Roblox • Edição de Natal</p>
+    </footer>
+
+    <script>
+        // Lucide Icons Init
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+            initWinterSnowAndIceCanvas();
+        });
+
+        // Copy to Clipboard System
+        function copyToClipboard(text, msg) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast(msg || "ID copiado!");
+        }
+
+        function copyBioLink() {
+            copyToClipboard(window.location.href, "Link da Bio copiado!");
+        }
+
+        // Toast Feedback Popup
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            toastMessage.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // Combined Soft Round Snow Particles + Translucent Ice Flakes (❄) Canvas
+        function initWinterSnowAndIceCanvas() {
+            const canvas = document.getElementById('snowCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+
+            // High-resolution terrain grid for realistic asymmetric snow dunes
+            const cols = 160;
+            let baseHeights = new Float32Array(cols);
+
+            // Initial realistic snow accumulation so the page already starts with snow
+            let baseSnowLevel = Math.min(46, Math.max(24, height * 0.045));
+            const maxSnowLevel = Math.min(138, Math.max(76, height * 0.165));
+            let waveTime = 0;
+
+            function buildAsymmetricProfile() {
+                // Asymmetric wind-swept drift: one side noticeably higher than the other with natural dunes
+                const leftHigh = Math.random() > 0.35;
+                for (let i = 0; i < cols; i++) {
+                    const u = i / (cols - 1); // 0 (left) -> 1 (right)
+                    const slopeBias = leftHigh
+                        ? (1.38 - u * 0.64)   // Higher drift on the left side, lower toward the right
+                        : (0.74 + u * 0.64);  // Lower on the left side, higher drift on the right
+
+                    const dune1 = Math.sin(u * Math.PI * 2.3 + 0.4) * 0.22;
+                    const dune2 = Math.cos(u * Math.PI * 5.1 - 1.1) * 0.11;
+                    const micro = Math.sin(u * Math.PI * 11.0 + 2.0) * 0.04;
+
+                    baseHeights[i] = Math.max(0.35, slopeBias + dune1 + dune2 + micro);
+                }
+            }
+
+            buildAsymmetricProfile();
+
+            function resize() {
+                const prevHeight = height || window.innerHeight;
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+
+                const scaleRatio = height / prevHeight;
+                baseSnowLevel = Math.min(maxSnowLevel, Math.max(18, baseSnowLevel * scaleRatio));
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Falling ice flakes (❄) from top to bottom
+            const iceFlakes = [];
+            const iceCount = 34;
+            for (let i = 0; i < iceCount; i++) {
+                iceFlakes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 14 + 10,
+                    speedY: Math.random() * 1.1 + 0.55,
+                    opacity: Math.random() * 0.45 + 0.25,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.012
+                });
+            }
+
+            // Get snow surface height (in px above bottom of screen) at normalized x (0..1)
+            function getSnowHeightAtNorm(u, t) {
+                const clampedU = Math.max(0, Math.min(1, u));
+                const exactIdx = clampedU * (cols - 1);
+                const i0 = Math.floor(exactIdx);
+                const i1 = Math.min(cols - 1, i0 + 1);
+                const frac = exactIdx - i0;
+
+                const gentleDrift = Math.sin(clampedU * Math.PI * 3 + t * 0.35) * 0.03;
+                const profileFactor = (baseHeights[i0] * (1 - frac) + baseHeights[i1] * frac) + gentleDrift;
+
+                return Math.max(0, baseSnowLevel * Math.max(0.25, profileFactor));
+            }
+
+            function getSnowHeightAtX(x, t) {
+                if (width <= 0) return 0;
+                return getSnowHeightAtNorm(x / width, t);
+            }
+
+            // Draw accumulated crisp white asymmetric snow dunes at the bottom
+            function drawAccumulatedSnow() {
+                const baseY = height;
+
+                ctx.save();
+
+                // Soft bright white back drift layer for depth
+                ctx.beginPath();
+                ctx.moveTo(0, baseY);
+                for (let i = 0; i < cols; i++) {
+                    const x = (i / (cols - 1)) * width;
+                    const h = getSnowHeightAtNorm(i / (cols - 1), waveTime * 0.7) * 1.08;
+                    ctx.lineTo(x, baseY - h);
+                }
+                ctx.lineTo(width, baseY);
+                ctx.closePath();
+
+                const backGrad = ctx.createLinearGradient(0, baseY - maxSnowLevel * 1.3, 0, baseY);
+                backGrad.addColorStop(0, 'rgba(248, 250, 252, 0.55)');
+                backGrad.addColorStop(1, 'rgba(226, 232, 240, 0.42)');
+                ctx.fillStyle = backGrad;
+                ctx.fill();
+
+                // Main bright white snow body (#ffffff / #f8fafc)
+                ctx.beginPath();
+                ctx.moveTo(0, baseY);
+                for (let i = 0; i < cols; i++) {
+                    const x = (i / (cols - 1)) * width;
+                    const h = getSnowHeightAtNorm(i / (cols - 1), waveTime);
+                    ctx.lineTo(x, baseY - h);
+                }
+                ctx.lineTo(width, baseY);
+                ctx.closePath();
+
+                const snowGrad = ctx.createLinearGradient(0, baseY - maxSnowLevel * 1.35, 0, baseY);
+                snowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.98)');
+                snowGrad.addColorStop(0.55, 'rgba(248, 250, 252, 0.94)');
+                snowGrad.addColorStop(1, 'rgba(241, 245, 249, 0.86)');
+
+                ctx.shadowColor = 'rgba(255, 255, 255, 0.45)';
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = snowGrad;
+                ctx.fill();
+
+                // Subtle soft shading in lower troughs to preserve asymmetric dune realism
+                ctx.shadowBlur = 0;
+                const shadeGrad = ctx.createLinearGradient(0, baseY - 28, 0, baseY);
+                shadeGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+                shadeGrad.addColorStop(1, 'rgba(203, 213, 225, 0.25)');
+                ctx.fillStyle = shadeGrad;
+                ctx.fill();
+
+                // Crisp bright white top edge along the snow surface
+                ctx.shadowColor = 'rgba(255, 255, 255, 0.65)';
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                for (let i = 0; i < cols; i++) {
+                    const x = (i / (cols - 1)) * width;
+                    const h = getSnowHeightAtNorm(i / (cols - 1), waveTime);
+                    const y = baseY - h;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.restore();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                waveTime += 0.012;
+
+                drawAccumulatedSnow();
+
+                // Draw & update falling ice flakes (❄) strictly from top to bottom
+                iceFlakes.forEach(f => {
+                    f.y += f.speedY;
+                    f.rotation += f.rotSpeed;
+
+                    const surfaceY = height - getSnowHeightAtX(f.x, waveTime);
+
+                    // When an ice flake reaches the snow surface, accumulate snow gradually
+                    if (f.y + f.size * 0.35 >= surfaceY) {
+                        if (baseSnowLevel < maxSnowLevel) {
+                            baseSnowLevel = Math.min(maxSnowLevel, baseSnowLevel + 0.16);
+                        }
+
+                        f.y = -24;
+                        f.x = Math.random() * width;
+                    }
+
+                    ctx.save();
+                    ctx.translate(f.x, f.y);
+                    ctx.rotate(f.rotation);
+                    ctx.font = `${f.size}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(255, 255, 255, 0.55)';
+                    ctx.shadowBlur = 7;
+                    ctx.fillStyle = `rgba(248, 250, 252, ${f.opacity})`;
+                    ctx.fillText('❄', 0, 0);
+                    ctx.restore();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
 </body>
 </html>
